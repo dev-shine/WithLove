@@ -46,11 +46,15 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
   let IconComponent = Ionicons;
   let iconName;
   if (routeName === 'Home') {
-    iconName = `ios-information-circle`;
+    iconName = `ios-home`;
     // We want to add badges to home tab icon
     IconComponent = HomeIconWithBadge;
   } else if (routeName === 'Profile') {
-    iconName = `ios-options`;
+    iconName = `ios-heart`;
+  } else if (routeName === 'Explore') {
+    iconName = `ios-search`;
+  } else if (routeName === 'Letters') {
+    iconName = `ios-paper`;
   }
 
   // You can return any component that you like here!
@@ -59,9 +63,9 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 const TabNavigator = createBottomTabNavigator({
   Home: Home,
-  Profile: Profile,
   Letters: Letters,
   Explore: Explore,
+  Profile: Profile,
 },
 {
   defaultNavigationOptions: ({ navigation }) => ({
