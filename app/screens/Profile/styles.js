@@ -17,6 +17,21 @@ const styles = StyleSheet.create({
       color: '#333333',
       marginBottom: 5,
     },
+    buttonContainer: {
+      height:45,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom:20,
+      width:250,
+      borderRadius:30,
+    },
+    loginButton: {
+      backgroundColor: '#3498db',
+    },
+    loginText: {
+      color: 'white',
+    },
   });
   
 export default styles;

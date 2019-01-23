@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import Letters from '../screens/Letters';
 import Explore from '../screens/Explore';
+import SignUp from '../screens/SignUp';
+import LogIn from '../screens/LogIn';
+
 class IconWithBadge extends React.Component {
   render() {
     const { name, badgeCount, color, size } = this.props;
@@ -78,6 +81,18 @@ const TabNavigator = createBottomTabNavigator({
   },
 }
 );
-
 const TabContainer = createAppContainer(TabNavigator);
-export { TabContainer }
+
+const StackNavigator = createStackNavigator({
+  LogIn: LogIn,
+  SignUp: SignUp,
+  Main: TabContainer,
+}, {
+    headerMode: 'none',
+    navigationOptions: {
+    headerVisible: false,
+  }
+ })
+
+const StackContainer = createAppContainer(StackNavigator);
+export { StackContainer, TabContainer };

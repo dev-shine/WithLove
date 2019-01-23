@@ -22,6 +22,8 @@ export default class SignUp extends Component {
 
   onClickListener = (viewId) => {
     Alert.alert("Alert", "Button pressed "+viewId);
+    const { navigation } = this.props;
+    navigation.navigate('Main');
   }
 
   render() {

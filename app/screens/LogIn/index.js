@@ -10,6 +10,14 @@ import styles from './styles';
 
 export default class Login extends Component {
 
+  onClickLogin = () => {
+    const { navigation } = this.props;
+    navigation.navigate('Main');
+  }
+  onClickRegister = () => {
+    const { navigation } = this.props;
+    navigation.navigate('SignUp');
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -33,11 +41,11 @@ export default class Login extends Component {
             <Text>Forgot?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]}>
+        <TouchableOpacity onPress={this.onClickLogin} style={[styles.buttonContainer, styles.loginButton]}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity onPress={this.onClickRegister} style={styles.buttonContainer}>
             <Text>Register</Text>
         </TouchableOpacity>
 
