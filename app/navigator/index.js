@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Home from '../screens/Home';
-import Profile from '../screens/Profile';
-import Letters from '../screens/Letters';
-import Explore from '../screens/Explore';
-import SignUp from '../screens/SignUp';
-import LogIn from '../screens/LogIn';
+import Home from '../containers/Home';
+import Profile from '../containers/Profile';
+import Letters from '../containers/Letters';
+import Explore from '../containers/Explore';
+import SignUp from '../containers/SignUp';
+import LogIn from '../containers/LogIn';
 
 class IconWithBadge extends React.Component {
   render() {
