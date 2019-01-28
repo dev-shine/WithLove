@@ -11,7 +11,8 @@ import styles from './styles';
 export default class Login extends Component {
 
   onClickLogin = () => {
-    const { navigation } = this.props;
+    const { navigation, apiLoading, user, isLoggedIn, error, logIn } = this.props;
+    
     navigation.navigate('Main');
   }
   onClickRegister = () => {
