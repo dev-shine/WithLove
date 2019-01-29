@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SignUp from '../../screens/SignUp'
 
-// import { 
- 
-//  } from '../../actions/homepage';
+import { 
+  signUp,
+} from '../../actions/authentication';
 
 
 class SignUpContainer extends Component {
@@ -25,14 +25,21 @@ class SignUpContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+   
     return {
-       
+      user: state.auth.user,
+      apiLoading: state.auth.apiLoading,
+      errors: state.auth.errors,
+      isLoggedIn: state.auth.isLoggedIn,
     };
+    
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        
+      signUp: user => {
+        dispatch(signUp(user))
+      }
     };
 }
 

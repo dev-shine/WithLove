@@ -3,14 +3,15 @@ import {
     OPERATION_FAILED,
     API_LOADING,
     LOGIN_SUCCESS,
+    LOGOUT_SUCCESS,
 } from '../consts/actionTypes';
 
 const initialState = {
    apiLoading: false,
    user: {},
-   error: '',
+   errors: null,
    isLoggedIn: false,
-   token: '',
+   token: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,12 +23,18 @@ const reducer = (state = initialState, action) => {
         return newState;
       case OPERATION_FAILED:
         newState.apiLoading = false;
-        newState.error = 'Login Failed'
+        newState.errors = action.errors
         return newState;
       case LOGIN_SUCCESS:
         newState.apiLoading = false;
-        newState.token = action.result.token
+        console.log(action.result, '---------------')
+        newState.token = action.result.user.token
         newState.isLoggedIn = true
+        return newState
+      case LOGOUT_SUCCESS:
+        newState.isLoggedIn = false
+        newState.token = null
+        newState.errors = null
         return newState
       default:
           return state;

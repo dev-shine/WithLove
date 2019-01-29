@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
        user: state.auth.user,
        apiLoading: state.auth.apiLoading,
-       error: state.auth.error,
+       errors: state.auth.errors,
        isLoggedIn: state.auth.isLoggedIn,
     };
 };

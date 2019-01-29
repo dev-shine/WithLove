@@ -1,6 +1,6 @@
 
 // const baseUrl = 'http://localhost:3001'
-const baseUrl = 'localhost:8000'
+let baseUrl = 'http://192.168.0.47:8000'
 
 export const fetchDataService = (url,authentication_token) => {
     return fetch(baseUrl + url, {

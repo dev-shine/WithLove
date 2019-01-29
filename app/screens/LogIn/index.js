@@ -4,27 +4,48 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import styles from './styles';
 
 export default class Login extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
   onClickLogin = () => {
-    const { navigation, apiLoading, user, isLoggedIn, error, logIn } = this.props;
+    const { logIn } = this.props;
+    logIn(this.state)
     
-    navigation.navigate('Main');
+  }
+  componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
+    if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      if (nextProps.isLoggedIn === true) {
+        navigation.navigate('Main');
+      } 
+    }
+    if (nextProps.errors !== this.props.errors) {
+      Alert.alert('Alert', JSON.stringify(nextProps.errors) )
+    }
   }
   onClickRegister = () => {
     const { navigation } = this.props;
     navigation.navigate('SignUp');
   }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <Image style={[styles.icon, styles.inputIcon]} source={{uri: 'https://png.icons8.com/password/androidL/40/3498db'}}/>
           <TextInput style={styles.inputs}
+              onChangeText={(email) => this.setState({email})}
               placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'/>
@@ -33,6 +54,7 @@ export default class Login extends Component {
         <View style={styles.inputContainer}>
           <Image style={[styles.icon, styles.inputIcon]} source={{uri: 'https://png.icons8.com/envelope/androidL/40/3498db'}}/>
           <TextInput style={styles.inputs}
+              onChangeText={(password) => this.setState({password})}
               placeholder="Password"
               secureTextEntry={true}
               underlineColorAndroid='transparent'/>
@@ -52,8 +74,8 @@ export default class Login extends Component {
 
         <TouchableOpacity style={[styles.buttonContainer, styles.fabookButton]}>
           <View style={styles.socialButtonContent}>
-            <Image style={styles.icon} source={{uri: 'https://png.icons8.com/twitter/androidL/40/FFFFFF'}}/>
-            <Text style={styles.loginText}>Continue with twitter</Text>
+            <Image style={styles.icon} source={{uri: 'https://png.icons8.com/facebook/androidL/40/FFFFFF'}}/>
+            <Text style={styles.loginText}>Continue with facebook</Text>
           </View>
         </TouchableOpacity>
 

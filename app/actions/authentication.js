@@ -2,6 +2,7 @@ import {
   OPERATION_FAILED,
   API_LOADING,
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from '../consts/actionTypes'
 
 import {
@@ -14,10 +15,10 @@ export function fetchingData () {
   }
 }
 
-export function operationFailed (error) {
+export function operationFailed (errors) {
   return {
       type: OPERATION_FAILED,
-      error
+      errors
   }
 }
 
@@ -28,17 +29,58 @@ export function logInSuccess(result) {
   }
 }
 
+export function logoutSuccess() {
+  return {
+      type: LOGOUT_SUCCESS,
+  }
+}
+
 export function logIn(user) {
-  console.log({'users': user})
+  console.log({'user': user})
+  const params = {
+    'user': user
+  }
   return (dispatch, getState) => {
       dispatch(fetchingData())
-      return postDataService('/users/login', {'user': user})
+      return postDataService('/api/users/login', params)
       .then((response) => {
-          console.log(response)
-          dispatch(logInSuccess(response))
+          console.log('result response ------', response)
+          if (!response.errors) {
+            dispatch(logInSuccess(response))
+          } else {
+            dispatch(operationFailed(response.errors))
+          }
       })
       .catch((err) => {
+          console.log('-------- result  error -----', err)
           dispatch(operationFailed(err))
       })
+  }
+}
+export function signUp(user) {
+  console.log({'user': user})
+  const params = {
+    'user': user
+  }
+  return (dispatch, getState) => {
+      dispatch(fetchingData())
+      return postDataService('/api/users', params)
+      .then((response) => {
+          console.log('result response ------', response)
+          if (!response.errors) {
+            dispatch(logInSuccess(response))
+          } else {
+            dispatch(operationFailed(response.errors))
+          }
+      })
+      .catch((err) => {
+          console.log('-------- result  error -----', err)
+          dispatch(operationFailed(err))
+      })
+  }
+}
+export function logOut() {
+  return (dispatch, getState) => {
+    dispatch(logoutSuccess())
   }
 }

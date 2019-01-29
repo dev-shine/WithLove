@@ -5,7 +5,8 @@ import styles from './styles';
 
 class Profile extends Component {
   onClickLogout = () => {
-    const { navigation } = this.props;
+    const { navigation, logOut } = this.props;
+    logOut();
     navigation.popToTop();
   }
   render() {

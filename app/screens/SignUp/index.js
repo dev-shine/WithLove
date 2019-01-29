@@ -20,10 +20,21 @@ export default class SignUp extends Component {
     }
   }
 
-  onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+  componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
-    navigation.navigate('Main');
+    if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
+      if (nextProps.isLoggedIn === true) {
+        navigation.navigate('Main');
+      }
+    }
+    if (nextProps.errors !== this.props.errors) {
+      Alert.alert('Alert', JSON.stringify(nextProps.errors) )
+    }
+  }
+
+  onClickRegister = () => {
+    const { signUp } = this.props;
+    signUp(this.state)
   }
 
   render() {
@@ -56,7 +67,7 @@ export default class SignUp extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.onClickRegister}>
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>
       </View>

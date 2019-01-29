@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Profile from '../../screens/Profile'
 
-// import { 
- 
-//  } from '../../actions/homepage';
+import { 
+  logOut,
+} from '../../actions/authentication';
 
 
 class ProfileContainer extends Component {
@@ -32,7 +32,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        
+        logOut: () => {
+          dispatch(logOut())
+        }
     };
 }
 
