@@ -7,6 +7,7 @@ import {
   Image,
   Alert
 } from 'react-native';
+import { LoginManager } from "react-native-fbsdk";
 import styles from './styles';
 
 export default class Login extends Component {
@@ -21,7 +22,26 @@ export default class Login extends Component {
   onClickLogin = () => {
     const { logIn } = this.props;
     logIn(this.state)
-    
+  }
+  facebookLogin = () => {
+    const { navigation } = this.props;
+    LoginManager.logInWithReadPermissions(["public_profile"]).then(
+      function(result) {
+        if (result.isCancelled) {
+          console.log("Login cancelled");
+        } else {
+          navigation.navigate('Main');
+          console.log(
+            "Login success with permissions: " +
+              result.grantedPermissions.toString()
+            
+          );
+        }
+      },
+      function(error) {
+        console.log("Login fail with error: " + error);
+      }
+    );
   }
   componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
@@ -72,7 +92,7 @@ export default class Login extends Component {
             <Text>Register</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.buttonContainer, styles.fabookButton]}>
+        <TouchableOpacity style={[styles.buttonContainer, styles.fabookButton]} onPress={this.facebookLogin}>
           <View style={styles.socialButtonContent}>
             <Image style={styles.icon} source={{uri: 'https://png.icons8.com/facebook/androidL/40/FFFFFF'}}/>
             <Text style={styles.loginText}>Continue with facebook</Text>
